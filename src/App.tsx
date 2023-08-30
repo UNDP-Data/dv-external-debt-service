@@ -1,24 +1,33 @@
-import undpLogo from './assets/undp-logo-blue.svg';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { csv } from 'd3-fetch';
+import { useEffect, useState } from 'react';
+import { CategoryData, DebtServiceType } from './Types';
+import { BarChart } from './BarChart';
+import './style.css';
 
 function App() {
+  const [debtServiceData, setDebtServiceData] = useState<
+    DebtServiceType[] | undefined
+  >();
+  const [categoriesData, setCategoriesData] = useState<
+    CategoryData[] | undefined
+  >(undefined);
+  useEffect(() => {
+    Promise.all([
+      csv('./data/externalDebtService.csv'),
+      csv('./data/categories.csv'),
+    ]).then(([data, categories]) => {
+      // eslint-disable-next-line no-console
+      console.log('data', data);
+      setDebtServiceData(data as any);
+      setCategoriesData(categories as any);
+    });
+  }, []);
   return (
-    <div className='undp-container flex-div flex-wrap flex-hor-align-center margin-top-13 margin-bottom-13'>
-      <div>
-        <img
-          src={undpLogo}
-          className='logo react'
-          alt='React logo'
-          width='72px'
-          style={{ margin: 'auto' }}
-        />
-      </div>
-      <h3
-        className='undp-typography'
-        style={{ textAlign: 'center', width: '100%' }}
-      >
-        This is template for building visualization and frontend project for
-        UNDP Data Futures Platform
-      </h3>
+    <div className='undp-container'>
+      {debtServiceData && categoriesData ? (
+        <BarChart data={debtServiceData} categories={categoriesData} />
+      ) : null}
     </div>
   );
 }
