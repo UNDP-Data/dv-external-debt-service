@@ -13,7 +13,7 @@ function App() {
     CategoryData[] | undefined
   >(undefined);
   const dataurl =
-    'https://raw.githubusercontent.com/UNDP-Data/dv-debt-to-gdp/main/public/data/';
+    'https://raw.githubusercontent.com/UNDP-Data/dv-external-debt-service/main/public/data/';
   // const dataurl = './data/';
   useEffect(() => {
     Promise.all([
