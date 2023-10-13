@@ -31,7 +31,6 @@ export function BarChart(props: Props) {
   const [svgHeight, setSvgHeight] = useState(0);
   const graphDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log('data', data);
     if (graphDiv.current) {
       setSvgHeight(graphDiv.current.clientHeight);
       setSvgWidth(graphDiv.current.clientWidth);

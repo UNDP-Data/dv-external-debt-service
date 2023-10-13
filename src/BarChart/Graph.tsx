@@ -29,12 +29,9 @@ export function Graph(props: Props) {
   const graphHeight = svgHeight - margin.top - margin.bottom;
   const minParam = 0;
   const combiOption = `${totalPercentOption}_${revenueExportsOption}`;
-  console.log('combiOption', combiOption);
-  console.log('data', data);
   const valueArray: number[] = data.map((d: any) => Number(d[combiOption]));
   const maxParam = max(valueArray) ? max(valueArray) : 0;
   const xDomain = data.map((d: any) => d.year);
-  console.log('xDomain', xDomain);
   const x = scaleBand()
     .domain(xDomain as [])
     .range([0, graphWidth])
@@ -94,7 +91,9 @@ export function Graph(props: Props) {
                     dx={x.bandwidth() / 2}
                     y={y((d as any)[combiOption]) - 5}
                   >
-                    {(d as any)[combiOption]}
+                    {`${Math.round((d as any)[combiOption])}${
+                      totalPercentOption === 'percentage' ? '%' : ''
+                    }`}
                   </text>
                 </g>
               ))}
