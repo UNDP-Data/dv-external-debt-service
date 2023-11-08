@@ -9,11 +9,9 @@ interface Props {
   data: DebtServiceType[];
   categories: CategoryData[];
 }
-
 const GraphDiv = styled.div`
   @media (max-width: 960px) {
-    height: 80vw;
-    max-height: 31.25rem;
+    height: 500px;
   }
 `;
 const numberPercentOptions = ['number', 'percentage'];
